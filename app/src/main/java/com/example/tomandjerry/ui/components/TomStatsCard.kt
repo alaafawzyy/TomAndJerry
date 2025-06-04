@@ -27,7 +27,7 @@ import com.example.tomandjerry.ui.theme.Gray37
 import com.example.tomandjerry.ui.theme.Gray60
 
 @Composable
-fun StatsContainer(
+fun TomStatsCard(
     modifier: Modifier=Modifier,
     backGroundColor: Color,
     image: Int,
@@ -79,6 +79,6 @@ fun StatsContainer(
 @Preview(showBackground = true)
 @Composable
 fun StatsContainerPreview(){
-StatsContainer(backGroundColor = Color(0XFFD0E5F0), image = R.drawable.stat_icon_container_1
+TomStatsCard(backGroundColor = Color(0XFFD0E5F0), image = R.drawable.stat_icon_container_1
 , title = "2M 12K", description = "No. of quarrels")
 }
