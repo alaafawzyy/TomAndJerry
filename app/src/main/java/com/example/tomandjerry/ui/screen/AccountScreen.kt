@@ -29,6 +29,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tomandjerry.R
+import com.example.tomandjerry.data.favoriteFoods
+import com.example.tomandjerry.data.statsCards
+import com.example.tomandjerry.data.tomSettings
 import com.example.tomandjerry.spacer.SpaceVertical12
 import com.example.tomandjerry.spacer.SpaceVertical8
 import com.example.tomandjerry.ui.components.TomStatsCard
@@ -46,27 +49,17 @@ fun AccountScreen() {
         Box(
             modifier = Modifier.fillMaxWidth(),
         ){
-        Image(
-            painter = painterResource(id = R.drawable.background_container),
-            contentDescription =null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(242.dp),
-            contentScale = ContentScale.Crop
-        )
-            AccountBackgroundItem()
+            AccountBackground()
         }}
-
         Box(modifier = Modifier
             .padding(top = 180.dp)
             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
             .fillMaxSize()
             .background(AccountBackground)) {
             AccountScreenContent()
-
-        }
-
+           }
 }
+
 
 @Composable
 fun AccountScreenContent() {
@@ -74,6 +67,7 @@ fun AccountScreenContent() {
         .fillMaxHeight()
         .fillMaxWidth()
         .padding(horizontal = 16.dp, vertical = 23.dp)){
+
         Row(modifier = Modifier
             .padding(bottom = 8.dp)
             .height(56.dp)
@@ -81,11 +75,19 @@ fun AccountScreenContent() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            TomStatsCard(backGroundColor = Color(0XFFD0E5F0), image = R.drawable.stat_icon_container_1
-                , title = "2M 12K", description = "No. of quarrels",  modifier = Modifier.weight(1f))
+            TomStatsCard(
+                backGroundColor = statsCards[0].backgroundColor,
+                image = statsCards[0].imageRes,
+                title = statsCards[0].title,
+                description = statsCards[0].description,
+                modifier = Modifier.weight(1f))
 
-            TomStatsCard(backGroundColor = Color(0XFFDEEECD), image = R.drawable.stat_icon_container_2
-                , title = "+500 h", description = "Chase time",  modifier = Modifier.weight(1f))
+            TomStatsCard(
+                backGroundColor = statsCards[1].backgroundColor,
+                image = statsCards[1].imageRes,
+                title = statsCards[1].title,
+                description = statsCards[1].description,
+                modifier = Modifier.weight(1f))
         }
 
         Row(modifier = Modifier
@@ -93,11 +95,19 @@ fun AccountScreenContent() {
             .height(56.dp),
 
             horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            TomStatsCard(backGroundColor = Color(0XFFF2D9E7), image = R.drawable.stat_icon_container_3
-                , title = "2M 12K", description ="Hunting times",  modifier = Modifier.weight(1f))
+            TomStatsCard(
+                backGroundColor = statsCards[2].backgroundColor,
+                image = statsCards[2].imageRes,
+                title = statsCards[2].title,
+                description = statsCards[2].description,
+                modifier = Modifier.weight(1f))
 
-            TomStatsCard(backGroundColor = Color(0XFFFAEDCF), image = R.drawable.stat_icon_container_4
-                , title = "3M 7K", description = "Heartbroken",  modifier = Modifier.weight(1f))
+            TomStatsCard(
+                backGroundColor = statsCards[3].backgroundColor,
+                image = statsCards[3].imageRes,
+                title = statsCards[3].title,
+                description = statsCards[3].description,
+                modifier = Modifier.weight(1f))
         }
 
         Text(
@@ -106,15 +116,14 @@ fun AccountScreenContent() {
             fontWeight = FontWeight(700),
             fontSize = 20.sp,
             color = PrimaryText,
-            textAlign =TextAlign.Center
-        )
+            textAlign =TextAlign.Center)
         SpaceVertical8()
 
-        TomAccountItem(image = R.drawable.settings_icon_container_1, text = "Change sleeping place")
+        TomAccountItem(image =tomSettings[0].icon, text =tomSettings[0].text )
         SpaceVertical12()
-        TomAccountItem(image = R.drawable.settings_icon_container_2, text = "Meow settings")
+        TomAccountItem(image =tomSettings[1].icon, text =tomSettings[1].text )
         SpaceVertical12()
-        TomAccountItem(image = R.drawable.settings_icon_container_3, text = "Password to open the fridge")
+        TomAccountItem(image =tomSettings[2].icon, text =tomSettings[2].text )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -124,15 +133,14 @@ fun AccountScreenContent() {
             fontWeight = FontWeight(700),
             fontSize = 20.sp,
             color = PrimaryText,
-            textAlign =TextAlign.Center
-        )
+            textAlign =TextAlign.Center)
         SpaceVertical8()
 
-        TomAccountItem(image = R.drawable.favorite_food_icon_container_1, text = "Mouses")
+        TomAccountItem(image =favoriteFoods[0].icon, text =favoriteFoods[0].text )
         SpaceVertical12()
-        TomAccountItem(image = R.drawable.favorite_food_icon_container_2, text = "Last stolen meal")
+        TomAccountItem(image =favoriteFoods[1].icon, text =favoriteFoods[1].text )
         SpaceVertical12()
-        TomAccountItem(image = R.drawable.favorite_food_icon_container_3, text = "Change sleep mood")
+        TomAccountItem(image =favoriteFoods[2].icon, text =favoriteFoods[2].text )
 
         Text(
             text = stringResource(R.string.v_tombeta),
@@ -145,7 +153,14 @@ fun AccountScreenContent() {
 }
 
 @Composable
-fun AccountBackgroundItem() {
+fun AccountBackground() {
+    Image(
+        painter = painterResource(id = R.drawable.background_container),
+        contentDescription =null,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(242.dp),
+        contentScale = ContentScale.Crop)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -155,13 +170,11 @@ fun AccountBackgroundItem() {
         Image(
             painter = painterResource(id = R.drawable.tomimg),
             contentDescription =null,
-
             modifier = Modifier
                 .padding(bottom = 4.dp)
                 .size(64.dp)
-                .clip(RoundedCornerShape(12.dp))
+                .clip(RoundedCornerShape(12.dp)))
 
-        )
         Text(
             text = "Tom",
             modifier = Modifier.height(23.dp),
